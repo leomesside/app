@@ -10,7 +10,7 @@ mongoose.connect(MONGO_URL, {useNewUrlParser: true})
 const app = Express()
 let port = process.env.port
 if(port == null || port == ""){
-    port = 0.0.0.0:8080
+    port = 8080
 }
 
 const UserSchema = new mongoose.Schema({
