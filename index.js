@@ -96,9 +96,9 @@ app.post("/update-code", (req, res)=>{
     })
 })
 
-app.get("/get-code", (req, res)=>{
+app.get("/get-code",async (req, res)=>{
     // console.log(req.query)
-    const user = User.findOne({email : req.query["email"]})
+    const user = await User.findOne({email : req.query["email"]})
     if(user == null || user["verify_code"] == "not_send"){
         res.status(400).send("not yet")
     }
