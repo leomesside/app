@@ -56,7 +56,7 @@ app.get("/get-aviable-user", async (req, res)=>{
         await curr_user.updateOne({status : "using"})
     }
     else{
-        res.send("no user aviable")
+        res.status(400).send("no user aviable")
     }
 })
 
@@ -80,12 +80,12 @@ app.post("/update-status",async (req, res)=>{
         })
     }
     else{
-        res.send("no user aviable")
+        res.status(400).send("no user avliable")
     }
 })
 
 
-app.post("/update-status", (req, res)=>{
+app.post("/update-code", (req, res)=>{
     const tmp = User.updateOne({email: req.query.email}, {verify_code : `${req.query.status}`})
     .then((e)=>{
         console.log("succees");
@@ -110,7 +110,7 @@ app.post("/remove", (req, res)=>{
             res.send("deleted success")
         })
         .catch((err)=>{
-            res.send(`remove error: ${err}`)
+            res.status(400).send(`remove error: ${err}`)
         })
 })
 
