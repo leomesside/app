@@ -98,10 +98,13 @@ app.post("/update-code", (req, res)=>{
 
 app.get("/get-code", (req, res)=>{
     // console.log(req.query)
-    User.findOne({email : req.query["email"]})
-        .then((user)=>{
-            res.send(user["verify_code"])
-        })
+    const user = User.findOne({email : req.query["email"]})
+    if(user == null || user["verify_code"] == "not_send"){
+        res.status(400).send("not yet")
+    }
+    else{
+        res.send(user["verify_code"])
+    }
 })
 
 app.post("/remove", (req, res)=>{
