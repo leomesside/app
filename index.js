@@ -60,9 +60,9 @@ app.get("/get-aviable-user", async (req, res)=>{
     }
 })
 
-app.post("/send-code", (req, res)=>{
+app.post("/send-code",async (req, res)=>{
     // console.log(req.query)
-    const tmp = User.updateOne({email: req.query.email}, {verify_code : `${req.query.code}`})
+    const tmp =await User.updateOne({email: req.query.email}, {verify_code : `${req.query.code}`})
         .then((e)=>{
             console.log("succees");
             res.send("update code success")
@@ -85,8 +85,8 @@ app.post("/update-status",async (req, res)=>{
 })
 
 
-app.post("/update-code", (req, res)=>{
-    const tmp = User.updateOne({email: req.query.email}, {verify_code : `${req.query.status}`})
+app.post("/update-code",async (req, res)=>{
+    const tmp = await User.updateOne({email: req.query.email}, {verify_code : `${req.query.status}`})
     .then((e)=>{
         console.log("succees");
         res.send("update status success")
@@ -107,8 +107,8 @@ app.get("/get-code",async (req, res)=>{
     }
 })
 
-app.post("/remove", (req, res)=>{
-    User.deleteOne({email : req.query["email"]})
+app.post("/remove",async (req, res)=>{
+    await User.deleteOne({email : req.query["email"]})
         .then((e)=>{
             res.send("deleted success")
         })
