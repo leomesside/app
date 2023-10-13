@@ -84,6 +84,9 @@ app.post("/update-status",async (req, res)=>{
     }
 })
 
+app.post("/send-test", (req, res)=>{
+    console.log(req.query.data)
+})
 
 app.post("/update-code",async (req, res)=>{
     const tmp = await User.updateOne({email: req.query.email}, {verify_code : `${req.query.status}`})
